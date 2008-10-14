@@ -54,6 +54,18 @@ module Frameworks
       execute "script/process/reaper -a kill -r mongrel.pid"
     end
   end
+  
+  module Camping
+    @port = 3301
+    @path = 'camping'
+    
+    def start
+      execute %{./camp_ctl.rb start -- `pwd`/camp.rb -p #{port} -s mongrel}
+    end
+    def stop
+      execute %{./camp_ctl.rb stop -- `pwd`/camp.rb -p #{port} -s mongrel}
+    end
+  end
 end
 
 module Runner
@@ -139,7 +151,7 @@ def stop(runners)
   end  
   sleep 1
   puts "Inspecting stale processes:"
-  system(%{ps aux | egrep "merb|start.rb|ramaze|rails"})
+  system(%{ps aux | egrep "merb|start.rb|ramaze|rails|camping"})
 end
 
 
