@@ -1,6 +1,6 @@
-Web frameworks comparison benchmark.
+Web frameworks benchmark.
 
-Recent results for simple string rendering (rps stands for requests per second):
+Recent results for the string rendering (rps = requests per second):
 
   Sinatra => 874.26 rps
   MerbVeryFlat => 783.36 rps
