@@ -119,9 +119,9 @@ def run(runners, requests_num, concurrency)
     table[name] = rps
     table
   end
-
-  results.each do |name, rps|
-    puts "#{name} => #{rps} rps"
+  results = results.to_a.sort_by{|a| a[1]}.reverse
+  results.each do |(name, rps)|
+    puts "  #{name} => #{rps} rps"
   end
 end
 
