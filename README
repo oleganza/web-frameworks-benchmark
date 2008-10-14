@@ -8,3 +8,16 @@ Recent results for the string rendering (rps = requests per second):
   Camping => 612.93 rps
   Ramaze => 532.59 rps
   Rails => 370.88 rps
+
+Memory footprint after 1000 requests (Kb):
+
+  Sinatra        => 15128
+  Camping        => 21172
+  Merb very flat => 31916 = 18836 worker + 13080 master 
+  Ramaze         => 33624 = 24460 worker + 9164 ramaze_monitor 
+  Rails          => 35248
+  Merb           => 48664 = 27364 worker + 21300 master
+
+Notes: 
+1. In a cluster of 4 processes merb beats Camping, Ramaze and Rails (only worker size is important).
+2. Difference gets smaller when you add your fat application code and libraries (rmagick etc.)
