@@ -48,7 +48,7 @@ Merb::Config.use { |c|
 
 
 Merb::Router.prepare do
-  match('/').to(:controller => 'merb-very-flat', :action =>'index')
+  match('/').to(:controller => 'merb_very_flat', :action =>'index')
 end
 
 class MerbVeryFlat < Merb::Controller
