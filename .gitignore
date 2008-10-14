@@ -3,3 +3,5 @@ rails/log/*.log
 rails/log/*.pid
 rails/tmp/pids/*
 camping/*.pid
+sinatra/*.pid
+sinatra/*.output

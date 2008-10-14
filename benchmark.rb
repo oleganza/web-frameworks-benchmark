@@ -66,6 +66,18 @@ module Frameworks
       execute %{./camp_ctl.rb stop -- `pwd`/camp.rb -p #{port} -s mongrel}
     end
   end
+  
+  module Sinatra
+    @port = 3900
+    @path = 'sinatra'
+    
+    def start
+      execute %{./sinatra-app.rb start -- -e production -p #{port}}
+    end
+    def stop
+      execute %{./sinatra-app.rb stop -- -e production -p #{port}}
+    end
+  end
 end
 
 module Runner
@@ -151,7 +163,7 @@ def stop(runners)
   end  
   sleep 1
   puts "Inspecting stale processes:"
-  system(%{ps aux | egrep "merb|start.rb|ramaze|rails|camping"})
+  system(%{ps aux | egrep "merb|start.rb|ramaze|rails|camping|sinatra"})
 end
 
 
