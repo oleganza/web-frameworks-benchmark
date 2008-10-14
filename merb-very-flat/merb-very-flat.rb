@@ -53,6 +53,6 @@ end
 
 class MerbVeryFlat < Merb::Controller
   def index
-    "Hi, I am 'very flat' Merb application. I have everything in one single file and well suited for dynamic stub pages."
+    "Hi, I am 'very flat' Merb application."
   end
 end

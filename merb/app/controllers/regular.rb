@@ -1,5 +1,5 @@
 class Regular < Application
   def index
-    "Welcome to merb app!"
+    "Hi, I am a regular Merb application."
   end
 end

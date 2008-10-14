@@ -2,9 +2,9 @@ Web frameworks comparison benchmark.
 
 Recent results for simple string rendering (rps stands for requests per second):
 
-  MerbVeryFlat => 797.08 rps
-  Merb => 713.43 rps
-  Camping => 569.82 rps
-  Ramaze => 534.78 rps
-  Rails => 306.4 rps
+  MerbVeryFlat => 784.78 rps
+  Merb => 717.02 rps
+  Camping => 654.71 rps
+  Ramaze => 497.61 rps
+  Rails => 376.36 rps
 
