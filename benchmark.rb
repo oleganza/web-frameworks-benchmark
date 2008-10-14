@@ -99,25 +99,7 @@ runners = Frameworks.constants.map{|c| Frameworks.const_get(c)}
 #runners = [Frameworks::Merb, Frameworks::MerbVeryFlat]
 runners.map{|r| r.extend(Runner::ClassMethods) }
 
-cmd = ARGV[0]
-
-if cmd == 'start'
-  runners.each do |r|
-    instance = Runner::Base.new_with(r)
-    instance.start
-  end  
-elsif cmd == 'stop'
-  runners.each do |r|
-    instance = Runner::Base.new_with(r)
-    instance.stop
-  end  
-  sleep 1
-  puts "Inspecting stale processes:"
-  system(%{ps aux | egrep "merb|start.rb|ramaze|rails"})
-  
-else
-  puts "Start and stop servers with .benchmark.rb start|stop"
-  puts ""
+def run(runners, requests_num, concurrency)
   puts "Testing frameworks with #{requests_num} requests and #{concurrency} connections: "
   # runners.each do |r|
   #   puts "  #{r.name} on port #{r.port}"
@@ -141,7 +123,51 @@ else
   results.each do |name, rps|
     puts "#{name} => #{rps} rps"
   end
+end
 
+def start(runners)
+  runners.each do |r|
+    instance = Runner::Base.new_with(r)
+    instance.start
+  end
+end
+
+def stop(runners)
+  runners.each do |r|
+    instance = Runner::Base.new_with(r)
+    instance.stop
+  end  
+  sleep 1
+  puts "Inspecting stale processes:"
+  system(%{ps aux | egrep "merb|start.rb|ramaze|rails"})
+end
+
+
+
+cmd = ARGV[0]
+
+if cmd == 'start'
+  start(runners)
+  puts ""
+  puts ""
+  sleep 0.5
+  run(runners, requests_num, concurrency)
+elsif cmd == 'restart'
+  stop(runners)
+  sleep 1
+  start(runners)
+  puts ""
+  puts ""
+  sleep 2
+  run(runners, requests_num, concurrency)
+elsif cmd == 'run'
+  run(runners, requests_num, concurrency)
+elsif cmd == 'stop'
+  stop(runners)
+else
+  puts "Start and stop servers with ./benchmark.rb start|stop"
+  puts "Use './benchmark.rb run' against already booted servers."
+  puts ""
 end
 
 
