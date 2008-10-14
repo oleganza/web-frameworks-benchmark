@@ -1,0 +1,4 @@
+merb/log/*
+rails/log/*.log
+rails/log/*.pid
+rails/tmp/pids/*
